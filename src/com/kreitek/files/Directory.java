@@ -1,5 +1,7 @@
 package com.kreitek.files;
 
+import com.kreitek.service.FileManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +41,7 @@ public class Directory extends FileSystemItemBase implements FileSystemItem {
 
     @Override
     public int getSize() {
-        throw new UnsupportedOperationException(NO_ES_VALIDO_PARA_DIRECTORIOS);
+        return FileManager.calculateSize(files);
     }
 
     @Override
