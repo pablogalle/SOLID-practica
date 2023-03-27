@@ -1,6 +1,7 @@
 package com.kreitek.service;
 
 import com.kreitek.files.Directory;
+import com.kreitek.files.DirectoryItem;
 import com.kreitek.files.File;
 import com.kreitek.files.FileSystemItem;
 
@@ -14,7 +15,8 @@ public class FileManager {
         if (fileSystemItem instanceof File) {
             totalSize = fileSystemItem.getSize();
         } else if (fileSystemItem instanceof Directory) {
-            for (FileSystemItem item : fileSystemItem.listFiles()) {
+            DirectoryItem directory = (DirectoryItem) fileSystemItem;
+            for (FileSystemItem item : directory.listFiles()) {
                 totalSize += calculateSize(item);
             }
         }
@@ -29,7 +31,8 @@ public class FileManager {
             if (item instanceof File) {
                 totalSize += item.getSize();
             } else if (item instanceof Directory) {
-                totalSize += calculateSize(item.listFiles());
+                DirectoryItem directory = (DirectoryItem) item;
+                totalSize += calculateSize(directory.listFiles());
             }
         }
 
