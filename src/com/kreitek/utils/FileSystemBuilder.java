@@ -1,18 +1,23 @@
 package com.kreitek.utils;
 
 import com.kreitek.files.*;
+import com.kreitek.interfaces.DirectoryItem;
+import com.kreitek.interfaces.FileItem;
+import com.kreitek.interfaces.FileSizeCalculator;
+import com.kreitek.interfaces.FileSystemItem;
 
 public class FileSystemBuilder {
 
     private final DirectoryItem root;
     private DirectoryItem currentDirectory;
+    private FileSizeCalculator fileSizeCalculator;
 
     public static FileSystemBuilder getBuilder() {
         return new FileSystemBuilder();
     }
 
     public FileSystemBuilder() {
-        root = new Directory(null, "");
+        root = new Directory(null, "", fileSizeCalculator);
         currentDirectory = root;
     }
 
@@ -26,7 +31,7 @@ public class FileSystemBuilder {
     }
 
     public FileSystemBuilder addDirectory(String name) {
-        DirectoryItem directory = new Directory(currentDirectory, name);
+        DirectoryItem directory = new Directory(currentDirectory, name, fileSizeCalculator);
         currentDirectory.addFile(directory);
         currentDirectory = directory;
         return this;

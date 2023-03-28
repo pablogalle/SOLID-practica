@@ -1,13 +1,14 @@
 package com.kreitek.service;
 
 import com.kreitek.files.Directory;
-import com.kreitek.files.DirectoryItem;
+import com.kreitek.interfaces.DirectoryItem;
 import com.kreitek.files.File;
-import com.kreitek.files.FileSystemItem;
+import com.kreitek.interfaces.FileSizeCalculator;
+import com.kreitek.interfaces.FileSystemItem;
 
 import java.util.List;
 
-public class FileManager {
+public class FileManager implements FileSizeCalculator {
 
     public static int calculateSize(FileSystemItem fileSystemItem) {
         int totalSize = 0;
@@ -24,7 +25,8 @@ public class FileManager {
         return totalSize;
     }
 
-    public static int calculateSize(List<FileSystemItem> files) {
+    @Override
+    public int calculateSize(List<FileSystemItem> files) {
         int totalSize = 0;
 
         for(FileSystemItem item : files) {

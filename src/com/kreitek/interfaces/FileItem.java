@@ -1,6 +1,4 @@
-package com.kreitek.files;
-
-import java.util.List;
+package com.kreitek.interfaces;
 
 public interface FileItem extends FileSystemItem{
     void open();
