@@ -1,4 +1,4 @@
-# ERRORES
+# ERRORES Principios SOLID
 
  ---
 ### *Principio de segregación de interfaz (ISP)*
@@ -89,11 +89,56 @@ class FileManager{
 
 ```
 
-Creamos la interaz `FileSizeCalculator` con el metodo `calculateSize()` para que asi la clase 
+Creamos la interaz `FileSizeCalculator` con el metodo `calculateSize()` para que así la clase 
 `FileManager` implemente esta interfaz. `Directory` tendrá una dependencia a la misma en lugar
 de a la clase `FileManager` directamente.
 
+### *Principio de Responsabilidad Única (SRP)*
 
+Extraemos los metodos `convertMp3ToWav()` y `convertWavToMp3()` de la clase `File`
+a una clase externa `FileConverterImpl` la cual implementa los metodos de la interfaz `FileConverter`
+que será la que se use en `File`.
 
+```java
+public interface FileConverter {
+    FileSystemItem convertMp3ToWav();
 
+    FileSystemItem convertWavToMp3();
+}
+
+public class FileConverterImpl implements FileConverter {
+    
+    //Constructor de la clase
+
+    @Override
+    public FileSystemItem convertMp3ToWav() {
+        //Logica para convertir de Mp3 a WAV
+    }
+    @Override
+    public FileSystemItem convertWavtoMp3() {
+        //Logica para convertir de WAV a Mp3
+    }
+    
+}
+
+public  class File extends FileSystemItemBase implements FileItem {
+    // Otras variables de logica ...
+    private final FileConverter fileConverter;
+    
+    public File(DirectoryItem parent, String name, FileConverter fileConverter) {
+        super(parent, name);
+        this.fileConverter = fileConverter;
+    }
+
+    // Demás metodos ...
+    
+    public FileSystemItem convertMp3ToWav(){
+        return fileConverter.convertMp3ToWav();
+    }
+
+    public FileSystemItem convertWavToMp3() {
+        return fileConverter.convertWavToMp3();
+    }
+}
+```
 

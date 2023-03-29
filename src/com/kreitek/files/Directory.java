@@ -1,7 +1,6 @@
 package com.kreitek.files;
 
-import com.kreitek.interfaces.FileSizeCalculator;
-import com.kreitek.service.FileManager;
+import com.kreitek.interfaces.FilesSizeCalculator;
 import com.kreitek.interfaces.DirectoryItem;
 import com.kreitek.interfaces.FileSystemItem;
 
@@ -10,13 +9,12 @@ import java.util.List;
 
 public class Directory extends FileSystemItemBase implements DirectoryItem {
     private final List<FileSystemItem> files;
-    private final FileSizeCalculator fileSizeCalculator;
+    private final FilesSizeCalculator filesSizeCalculator;
 
-
-    public Directory(DirectoryItem parent, String name, FileSizeCalculator fileSizeCalculator) {
+    public Directory(DirectoryItem parent, String name, FilesSizeCalculator filesSizeCalculator) {
         super(parent, name);
         files = new ArrayList<>();
-        this.fileSizeCalculator = fileSizeCalculator;
+        this.filesSizeCalculator = filesSizeCalculator;
         // Aquí vendría lógica que rellena la lista de ficheros
     }
 
@@ -40,6 +38,6 @@ public class Directory extends FileSystemItemBase implements DirectoryItem {
 
     @Override
     public int getSize() {
-        return fileSizeCalculator.calculateSize(files);
+        return filesSizeCalculator.calculateSize(files);
     }
 }
