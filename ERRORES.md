@@ -1,7 +1,7 @@
 # ERRORES Principios SOLID
 
  ---
-### *Principio de segregación de interfaz (ISP)*
+- ### *Principio de segregación de interfazes (ISP)*
 
 La interfaz `FileSystemItem` se ha dividido en interfaces más específicas; 
 `FileItem` y `DirectoryItem`. De esta forma la clase `File`tendran que implementar 
@@ -69,7 +69,7 @@ class File {
 }
 ```
 
-### *Principio de inversión de dependencia (DIP)*
+- ### *Principio de inversión de dependencia (DIP)*
  
 La clase `Directory` depende directamente de la clase `File Manager`.
 ```java
@@ -93,7 +93,7 @@ Creamos la interaz `FileSizeCalculator` con el metodo `calculateSize()` para que
 `FileManager` implemente esta interfaz. `Directory` tendrá una dependencia a la misma en lugar
 de a la clase `FileManager` directamente.
 
-### *Principio de Responsabilidad Única (SRP)*
+- ### *Principio de Responsabilidad Única (SRP)*
 
 Extraemos los metodos `convertMp3ToWav()` y `convertWavToMp3()` de la clase `File`
 a una clase externa `FileConverterImpl` la cual implementa los metodos de la interfaz `FileConverter`

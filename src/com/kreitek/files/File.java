@@ -74,11 +74,11 @@ public class File extends FileSystemItemBase implements FileItem {
     }
 
     public FileSystemItem convertMp3ToWav(){
-        return fileConverter.convertMp3ToWav();
+        return fileConverter.convertMp3ToWav(this);
     }
 
     public FileSystemItem convertWavToMp3() {
-        return fileConverter.convertWavToMp3();
+        return fileConverter.convertWavToMp3(this);
     }
 
 }

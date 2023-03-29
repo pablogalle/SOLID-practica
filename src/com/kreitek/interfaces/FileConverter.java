@@ -1,6 +1,7 @@
 package com.kreitek.interfaces;
 
+
 public interface FileConverter {
-    FileSystemItem convertMp3ToWav();
-    FileSystemItem convertWavToMp3();
+    FileSystemItem convertMp3ToWav(FileItem file);
+    FileSystemItem convertWavToMp3(FileItem file);
 }

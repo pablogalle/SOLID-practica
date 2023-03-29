@@ -2,19 +2,25 @@ package com.kreitek.utils;
 
 import com.kreitek.files.*;
 import com.kreitek.interfaces.*;
+import com.kreitek.service.FileConverterImpl;
+import com.kreitek.service.FilesManager;
 
 public class FileSystemBuilder {
 
     private final DirectoryItem root;
     private DirectoryItem currentDirectory;
-    private FilesSizeCalculator filesSizeCalculator;
-    private FileConverter fileConverter;
+    private final FilesSizeCalculator filesSizeCalculator;
+    private final FileConverter fileConverter;
 
     public static FileSystemBuilder getBuilder() {
+
         return new FileSystemBuilder();
     }
 
     public FileSystemBuilder() {
+        filesSizeCalculator = new FilesManager();
+        fileConverter = new FileConverterImpl();
+
         root = new Directory(null, "", filesSizeCalculator);
         currentDirectory = root;
     }
