@@ -3,19 +3,19 @@ package com.kreitek.utils;
 import com.kreitek.files.Directory;
 import com.kreitek.interfaces.DirectoryItem;
 import com.kreitek.interfaces.FileSystemItem;
-import com.kreitek.service.FilesManager;
+import com.kreitek.service.FileManager;
 
 public class FileSystemPrinter {
 
-    private final FilesManager fileManager;
+    private final FileManager fileManager;
 
     public FileSystemPrinter() {
-        this.fileManager = new FilesManager();
+        this.fileManager = new FileManager();
     }
 
     public static void print(FileSystemItem item, int nivel) {
         String indentation = "\t".repeat(nivel);
-        String message = String.format("%s%s = %d bytes", indentation, item.getFullPath(), FilesManager.calculateSize(item));
+        String message = String.format("%s%s = %d bytes", indentation, item.getFullPath(), FileManager.calculateSize(item));
         System.out.println(message);
 
         if (item instanceof Directory) {

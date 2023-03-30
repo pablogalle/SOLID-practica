@@ -71,7 +71,7 @@ class File {
 
 - ### *Principio de inversión de dependencia (DIP)*
  
-La clase `Directory` depende directamente de la clase `File Manager`.
+La clase `Directory` y `FileSystemPrinter` depende directamente de la clase `File Manager`.
 ```java
 class Directory{
     
@@ -83,15 +83,69 @@ class Directory{
 class FileManager{
     
     public static int calculateSize(List<FileSystemItem> files) {
-        // Aqui estaria el codigo de calculateSize
+        // Aqui estaria el codigo de calculateSize para una lista de archivos
+    }
+    
+    public static int calculateSize(FileSystemItem file) {
+        // Aqui estaria el codigo de calculateSize para un solo archivo
     }
 }
 
+public class FileSystemPrinter {
+
+    private final FilesManager fileManager;
+
+    public FileSystemPrinter() {
+        this.fileManager = new FilesManager();
+    }
+
+    public static void print(FileSystemItem item, int nivel) {
+        // Codigo que contiene FileManager.calculateSize(FileSystemItem file) 
+    }
+}
 ```
 
-Creamos la interaz `FileSizeCalculator` con el metodo `calculateSize()` para que así la clase 
-`FileManager` implemente esta interfaz. `Directory` tendrá una dependencia a la misma en lugar
-de a la clase `FileManager` directamente.
+Creamos la interaz `FileSizeCalculator` con los metodos `calculateSize()` para que así la clase
+`FileManager` implemente esta interfaz. `Directory` y `FileSystemPrinter` tendrán una dependencia
+a la misma en lugar de a la clase `FileManager` directamente.
+
+Además modificamos la logica `if (fileSystemItem instanceof File)` del metodo `calculateSize()` 
+por referencias a la interfaz correspondiente `if (fileSystemItem instanceof FileItem)`
+
+```java
+class Directory {
+    private final List<FileSystemItem> files;
+    private final FilesSizeCalculator filesSizeCalculator;
+
+    public Directory(DirectoryItem parent, String name, FilesSizeCalculator filesSizeCalculator) {
+        super(parent, name);
+        files = new ArrayList<>();
+        this.filesSizeCalculator = filesSizeCalculator;
+        // Aquí vendría lógica que rellena la lista de ficheros
+    }
+    
+    public int getSize() {
+        return filesSizeCalculator.calculateSize(files);
+    }
+}
+
+public interface FilesSizeCalculator {
+    //int calculateSize(FileSystemItem file);
+    int calculateSize(List<FileSystemItem> files);
+}
+
+public class FilesManager implements FilesSizeCalculator {
+
+    public static int calculateSize(FileSystemItem fileSystemItem) {
+        // Aqui estaria el codigo de calculateSize para una lista de archivos
+    }
+    @Override
+    public int calculateSize(List<FileSystemItem> files) {
+        // Aqui estaria el codigo de calculateSize para un solo archivo
+    }
+}
+```
+
 
 - ### *Principio de Responsabilidad Única (SRP)*
 

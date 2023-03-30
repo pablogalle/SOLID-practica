@@ -1,7 +1,5 @@
 package com.kreitek;
 
-import com.kreitek.files.File;
-import com.kreitek.interfaces.FileItem;
 import com.kreitek.interfaces.FileSystemItem;
 import com.kreitek.utils.FileSystemBuilder;
 import com.kreitek.utils.FileSystemPrinter;

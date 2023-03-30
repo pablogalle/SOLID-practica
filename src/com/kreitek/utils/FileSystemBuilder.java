@@ -3,7 +3,7 @@ package com.kreitek.utils;
 import com.kreitek.files.*;
 import com.kreitek.interfaces.*;
 import com.kreitek.service.FileConverterImpl;
-import com.kreitek.service.FilesManager;
+import com.kreitek.service.FileManager;
 
 public class FileSystemBuilder {
 
@@ -18,7 +18,7 @@ public class FileSystemBuilder {
     }
 
     public FileSystemBuilder() {
-        filesSizeCalculator = new FilesManager();
+        filesSizeCalculator = new FileManager();
         fileConverter = new FileConverterImpl();
 
         root = new Directory(null, "", filesSizeCalculator);
